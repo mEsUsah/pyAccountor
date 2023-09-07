@@ -1,16 +1,12 @@
-
-
-def list_tables(conn):
-    c = conn.cursor()
-    for table in c.execute('PRAGMA table_list;'):
-        if table[1].startswith("sqlite"):
-            continue
-
-        print("-"*10, table[1].center(15), "-"*10, sep="")
-        c = conn.cursor()
-        for row in c.execute(f"PRAGMA table_info('{table[1]}')"):
-            print(row)
-        print()
+def splash() -> None:
+    logo = """
+             _____                     _           
+     ___ _ _|  _  |___ ___ ___ _ _ ___| |_ ___ ___ 
+    | . | | |     |  _|  _| . | | |   |  _| . |  _|
+    |  _|_  |__|__|___|___|___|___|_|_|_| |___|_|  
+    |_| |___| by Stanley Skarshaug - www.haxor.no
+    """
+    print(logo)
 
 def send_money(accounts_raw:tuple) -> None:
     accounts = {key:value for key, value in accounts_raw }
