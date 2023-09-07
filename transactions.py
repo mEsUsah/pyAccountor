@@ -19,7 +19,7 @@ class Transactions:
         );''')
         self.conn.commit()
 
-    def debit(self, account: int, amount:int) -> None:
+    def __debit(self, account: int, amount:int) -> None:
         c = self.conn.cursor()
         today = date.today()
         c.execute('''INSERT INTO transactions (
@@ -37,7 +37,7 @@ class Transactions:
             ))
         self.conn.commit()
     
-    def credit(self, account: int, amount:int) -> None:
+    def __credit(self, account: int, amount:int) -> None:
         c = self.conn.cursor()
         today = date.today()
         c.execute('''INSERT INTO transactions (
@@ -64,8 +64,8 @@ class Transactions:
         """Transfer money from one account to another"""
 
         try:
-            self.credit(from_account, amount)
-            self.debit(to_account, amount)
+            self.__credit(from_account, amount)
+            self.__debit(to_account, amount)
             return True
         except Exception as e:
             print(e)
