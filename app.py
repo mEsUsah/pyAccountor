@@ -19,8 +19,8 @@ if __name__ == "__main__":
     print()
     
     # menu
-    sender, reciver, amount = cli.send_money(accounts.get_all())
-    transactions.send_money(sender, reciver, amount)
+    sender, reciver, amount, comment = cli.send_money(accounts.get_all())
+    transactions.send_money(sender, reciver, amount, comment)
 
     conn.close()
 

@@ -27,5 +27,6 @@ def send_money(accounts_raw:tuple) -> None:
             break
 
     amount = int(input("How much? "))
-    return (from_account, to_account, amount)
+    comment = input("Comment: ")
+    return (from_account, to_account, amount, comment)
         
