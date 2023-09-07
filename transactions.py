@@ -15,7 +15,7 @@ class Transactions:
             date TEXT NOT NULL,
             debit INTEGER DEFAULT NULL,
             credit INTEGER DEFAULT NULL,
-            forfilled INTEGER DEFAULT NULL
+            fulfilled INTEGER DEFAULT NULL
         );''')
         self.conn.commit()
 
@@ -26,7 +26,7 @@ class Transactions:
                 date, 
                 account_id, 
                 debit,
-                forfilled
+                fulfilled
             ) 
             VALUES (?,?,?,?)''', 
             (
@@ -44,7 +44,7 @@ class Transactions:
                 date, 
                 account_id, 
                 credit,
-                forfilled
+                fulfilled
             ) 
             VALUES (?,?,?,?)''', 
             (
