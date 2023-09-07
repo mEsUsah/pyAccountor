@@ -2,18 +2,19 @@
 An ultra simple Python3 CLI project to account for work done by my kids and other 
 events that earn them money.
 
-## How to run
+## How to run:
 * Clone project
 ```bash
-git clone <project-name>
+git clone git@github.com:mEsUsah/pyaccountor.git
 ```
 
 * run app
 ```bash
-cd
+cd pyaccountor
+python3 app.py
 ```
 
-## Tables
+## Tables:
 * accounts
     * id (INTEGER) <--- Primary key
     * name (TEXT)
