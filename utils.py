@@ -32,3 +32,21 @@ def list_tables(conn) -> None:
         for row in c.execute(f"PRAGMA table_info('{table[1]}')"):
             print(row)
         print()
+
+def menu(options: list) -> int:  
+    print()
+    for i, option in enumerate(options):
+        print(f'{i + 1}: {option}')
+
+    while True:
+        try:
+            selected = int(input('Select a number: '))
+        except:
+            print('Error, invalid selection. ', end="")
+            continue
+        
+        if selected > 0 and selected <= len(options):
+            selected -= 1
+            break
+
+    return selected

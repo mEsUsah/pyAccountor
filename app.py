@@ -5,6 +5,21 @@ from transactions import Transactions
 import utils
 import cli
 
+# Static variables
+TRANSFER = 0
+LIST_ACCOUNTS = 1
+
+def handle_menu_selection(selection):
+    if selection == TRANSFER:
+        data = cli.send_money(accounts.get_all())
+        if data:
+            transactions.send_money(*data)
+        else:
+            return
+    elif selection == LIST_ACCOUNTS:
+        accounts.show()
+
+
 if __name__ == "__main__":  
     # setup
     cli.splash()
@@ -15,12 +30,22 @@ if __name__ == "__main__":
     accounts.create_table()
     transactions = Transactions(conn)
     transactions.create_table()
-    print("-"*79)
-    print()
     
     # menu
-    sender, reciver, amount, comment = cli.send_money(accounts.get_all())
-    transactions.send_money(sender, reciver, amount, comment)
+    main_menu_options = (
+        "Transfer money",
+        "List accounts",
+        "Exit program",
+    )
 
+    while True:
+        print("-"*79)
+        print("MAIN MENU:")
+        main_menu_selected = utils.menu(main_menu_options)
+        if main_menu_selected == len(main_menu_options) - 1:
+            break
+        
+        handle_menu_selection(main_menu_selected)
+        
     conn.close()
-
+    exit()
