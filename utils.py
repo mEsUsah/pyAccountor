@@ -33,20 +33,47 @@ def list_tables(conn) -> None:
             print(row)
         print()
 
-def menu(options: list) -> int:  
-    print()
-    for i, option in enumerate(options):
-        print(f'{i + 1}: {option}')
+def menu(options) -> int:  
+    """ Simple CLI menu system:
+
+    * Options must of type list, tuple or dictionary
+    * Dictionary must use numeric keys
+
+    Returns the list or tuple index selected, or dictionary key.
+    NOTE: If quit is selected it will return -1.
+    """
+
+    if isinstance(options, list) or isinstance(options, tuple):
+        options_type = "simple"
+    elif isinstance(options, dict):
+        options_type = "dict"
+
+    if options_type == "simple":
+        for i, option in enumerate(options):
+            print(f'{i + 1}: {option}')
+    elif options_type == "dict":
+        for key, value in options.items():
+            print(f'{key}: {value}')
+
+    print("Q: quit")
 
     while True:
         try:
-            selected = int(input('Select a number: '))
-        except:
+            selected = input('Select: ')
+            if selected.lower() == "q":
+                return -1
+            selected = int(selected)
+        except ValueError:
             print('Error, invalid selection. ', end="")
             continue
         
-        if selected > 0 and selected <= len(options):
-            selected -= 1
-            break
+        if options_type == "simple":
+            if selected > 0 and selected <= len(options):
+                selected -= 1
+                break
+
+        elif options_type == "dict":
+            if selected in options:
+                break
 
     return selected
