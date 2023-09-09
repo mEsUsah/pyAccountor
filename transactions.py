@@ -77,6 +77,29 @@ class Transactions:
         print(f"The current balance is: {balance}")
 
 
+    def get_transactions(self, account: int) -> None:
+        print("+" + "-"*13 + "+" + "-"*51 + "+" + "-"*10 + "+")
+        print("| Date".ljust(14) + "| Comment".ljust(52) + "|" + "Amount ".rjust(10) + "|")
+        print("+" + "-"*13 + "+" + "-"*51 + "+" + "-"*10 + "+")
+        c = self.conn.cursor()
+        query = f'''SELECT date, comment, debit, credit FROM transactions
+            WHERE account_id = {account};'''
+        
+        for row in c.execute(query):
+            if row[1] is None:
+                comment = ""
+            else:
+                comment = row[1]
+            
+            if row[2] is not None:
+                amount = str(row[2])
+            else:
+                amount = "-" + str(row[3]) # credit
+            
+            print("| " + row[0].ljust(12) + "| " + comment.ljust(50) + "| " + amount.rjust(8) + " |")
+        
+        print("+" + "-"*13 + "+" + "-"*51 + "+" + "-"*10 + "+")
+
     def send_money(self, 
             from_account: int, 
             to_account: int, 

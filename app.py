@@ -10,6 +10,7 @@ QUIT = -1
 MENU_TRANSFER = 0
 MENU_LIST_ACCOUNTS = 1
 MENU_SHOW_BALANCE = 2
+MENU_SHOW_TRANSACTIONS = 3
 
 def handle_menu_selection(selection):
     if selection == MENU_TRANSFER:
@@ -26,6 +27,12 @@ def handle_menu_selection(selection):
             return
         else:
             transactions.get_balance(account)
+    elif selection == MENU_SHOW_TRANSACTIONS:
+        account = cli.get_account(accounts.get_all())
+        if account == -1:
+            return
+        else:
+            transactions.get_transactions(account)
 
 
 if __name__ == "__main__":  
@@ -44,10 +51,10 @@ if __name__ == "__main__":
         "Transfer money",
         "List accounts",
         "Show balance",
+        "Show transactions",
     )
 
     while True:
-        print("-"*79)
         print("MAIN MENU:")
         main_menu_selected = utils.menu(main_menu_options)
         if main_menu_selected == QUIT:
