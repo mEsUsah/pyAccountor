@@ -8,7 +8,16 @@ def splash() -> None:
     """
     print(logo)
 
-def send_money(accounts_raw:tuple) -> None:
+def send_money(accounts_raw:tuple) -> tuple:
+    """Helper menu get needed data to transfer money.
+
+    Returns a tuple with:
+    * from_account
+    * to_account
+    * amount
+    * comment
+    """
+
     accounts = {key:value for key, value in accounts_raw }
     print("-"*80)
     
