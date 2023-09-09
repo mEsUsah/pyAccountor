@@ -60,6 +60,22 @@ class Transactions:
             ))
         self.conn.commit()
 
+    def get_balance(self, account: int) -> None:
+        c = self.conn.cursor()
+        query = f'''SELECT sum(debit), sum(credit) FROM transactions
+            WHERE account_id = {account};'''
+
+        c.execute(query)
+        debit, credit = c.fetchone()
+        if debit is None:
+            debit = 0
+        if credit is None:
+            credit = 0
+
+        balance = debit - credit
+        
+        print(f"The current balance is: {balance}")
+
 
     def send_money(self, 
             from_account: int, 

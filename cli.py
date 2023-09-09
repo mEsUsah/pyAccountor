@@ -11,6 +11,7 @@ def splash() -> None:
     """
     print(logo)
 
+
 def send_money(accounts_raw:tuple) -> tuple:
     """Helper menu get needed data to transfer money.
 
@@ -41,4 +42,20 @@ def send_money(accounts_raw:tuple) -> tuple:
     amount = int(input("How much? "))
     comment = input("Comment: ")
     return (from_account, to_account, amount, comment)
-        
+
+
+def get_account(accounts_raw:tuple) -> int:
+    """Helper menu to get account_id
+    """
+    
+    accounts = {key:value for key, value in accounts_raw }
+    print("-"*80)
+    
+    while True:
+        account = utils.menu(accounts)
+        if account == -1:
+            return -1
+        else: 
+            break
+    
+    return account
