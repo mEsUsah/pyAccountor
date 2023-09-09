@@ -1,3 +1,6 @@
+import utils
+
+
 def splash() -> None:
     logo = """
              _____                     _           
@@ -22,31 +25,18 @@ def send_money(accounts_raw:tuple) -> tuple:
     print("-"*80)
     
     while True:
-        for key, value in accounts.items():
-            print(key, value, sep=" - ")
-        print("q - Quit / return to menu")
-        from_account = input("Select sender: ")
-        try:
-            if from_account.lower() == "q":
-                return
-            if accounts[int(from_account)]:
-                print("-"*80)
-                break
-        except ValueError:
-            print("Error: You entered an invalid option. Enter a number, or q")
+        from_account = utils.menu(accounts)
+        if from_account == -1:
+            return
+        else: 
+            break
     
     while True:
-        for key, value in accounts.items():
-            print(key, value, sep=" - ")
-        print("q - Quit / return to menu")
-        to_account = input("Select receiver: ")
-        try:
-            if from_account.lower() == "q":
-                return
-            if accounts[int(to_account)]:
-                break
-        except ValueError:
-            print("Error: You entered an invalid option. Enter a number, or q")
+        to_account = utils.menu(accounts)
+        if from_account == -1:
+            return
+        else: 
+            break
 
     amount = int(input("How much? "))
     comment = input("Comment: ")

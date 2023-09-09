@@ -6,17 +6,18 @@ import utils
 import cli
 
 # Static variables
-TRANSFER = 0
-LIST_ACCOUNTS = 1
+QUIT = -1
+MENU_TRANSFER = 0
+MENU_LIST_ACCOUNTS = 1
 
 def handle_menu_selection(selection):
-    if selection == TRANSFER:
+    if selection == MENU_TRANSFER:
         data = cli.send_money(accounts.get_all())
         if data:
             transactions.send_money(*data)
         else:
             return
-    elif selection == LIST_ACCOUNTS:
+    elif selection == MENU_LIST_ACCOUNTS:
         accounts.show()
 
 
@@ -34,15 +35,14 @@ if __name__ == "__main__":
     # menu
     main_menu_options = (
         "Transfer money",
-        "List accounts",
-        "Exit program",
+        "List accounts"
     )
 
     while True:
         print("-"*79)
         print("MAIN MENU:")
         main_menu_selected = utils.menu(main_menu_options)
-        if main_menu_selected == len(main_menu_options) - 1:
+        if main_menu_selected == QUIT:
             break
         
         handle_menu_selection(main_menu_selected)
