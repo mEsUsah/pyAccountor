@@ -1,11 +1,17 @@
 import tkinter as tk
 from tkinter import ttk
+import utils
 
 import gui
+
+def on_closing():
+    utils.db.disconnect()
+    window.destroy()
 
 window = tk.Tk()
 window.title("pyAccountor")
 window.geometry("-100+100")
+window.protocol("WM_DELETE_WINDOW", on_closing)
 # window.resizable(False,False)
 
 mainTabControl = ttk.Notebook(window)
@@ -19,6 +25,7 @@ mainTabControl.pack(expand=1, fill="both")
 
 accounts = gui.accounts.Tab(accountsTab)
 transfer = gui.transfer.Tab(transferTab)
+
 
 
 # Credits

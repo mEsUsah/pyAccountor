@@ -32,6 +32,9 @@ class Db:
                 exit()
         else:
             print("Success: Found DB")
+    
+    def disconnect(self):
+        self.conn.close()
 
 db = Db()
 
