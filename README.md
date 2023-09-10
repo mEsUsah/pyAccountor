@@ -1,5 +1,5 @@
 # Accounting project
-An ultra simple Python3 CLI project to account for work done by my kids and other 
+Ultra simple Python 3 project to account for work done by my kids and other 
 events that earn them money.
 
 ## How to run:
@@ -8,10 +8,10 @@ events that earn them money.
 git clone git@github.com:mEsUsah/pyaccountor.git
 ```
 
-* run app
+* run CLI app
 ```bash
 cd pyaccountor
-python3 app.py
+python3 cli_app.py
 ```
 
 ## Tables:
