@@ -11,10 +11,14 @@ window.geometry("-100+100")
 mainTabControl = ttk.Notebook(window)
 
 accountsTab =  ttk.Frame(mainTabControl)
+transferTab =  ttk.Frame(mainTabControl)
 mainTabControl.add(accountsTab, text="Accounts")
+mainTabControl.add(transferTab, text="Transfer")
+
 mainTabControl.pack(expand=1, fill="both")
 
 accounts = gui.accounts.Tab(accountsTab)
+transfer = gui.transfer.Tab(transferTab)
 
 
 # Credits

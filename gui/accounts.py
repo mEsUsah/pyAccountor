@@ -37,7 +37,6 @@ class Tab:
 
         for row in accounts_list:
             row['balance'] = db.transactions.get_balance(int(row['id']))
-            print(row)
             table.insert(
                 '',
                 'end',
