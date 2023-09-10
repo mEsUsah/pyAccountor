@@ -1,4 +1,4 @@
-import utils
+import cli.utils as utils
 
 
 def splash() -> None:

@@ -2,7 +2,7 @@ import sqlite3
 
 from models.accounts import Accounts
 from models.transactions import Transactions
-import utils
+import cli.utils as utils
 import cli.cli as cli
 
 # Static variables
