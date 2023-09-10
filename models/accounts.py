@@ -28,8 +28,15 @@ class Accounts:
             print(row)
 
     def get_all(self):
-        c = self.conn.cursor()
-        return c.execute('SELECT * FROM accounts')
+        c = self.conn
+        c.row_factory = sqlite3.Row
+        values = c.execute('SELECT * FROM accounts').fetchall()
+        
+        accounts = []
+        for item in values:
+            if item is not None:
+                accounts.append({k: item[k] for k in item.keys()})
+        return accounts
 
     def get(self, id) -> tuple:
         c = self.conn.cursor()

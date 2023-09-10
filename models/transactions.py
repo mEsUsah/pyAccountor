@@ -74,7 +74,8 @@ class Transactions:
 
         balance = debit - credit
         
-        print(f"The current balance is: {balance}")
+        # print(f"The current balance is: {balance}")
+        return balance
 
 
     def get_transactions(self, account: int) -> None:
