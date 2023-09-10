@@ -8,7 +8,7 @@ class Accounts:
         c = self.conn.cursor()
         c.execute('''CREATE TABLE IF NOT EXISTS accounts (
             id INTEGER PRIMARY KEY,
-            name TEXT NOT NULL
+            name TEXT NOT NULL UNIQUE
         );''')
         self.conn.commit()
 
@@ -42,4 +42,9 @@ class Accounts:
         c = self.conn.cursor()
         c.execute(f'''SELECT * FROM accounts WHERE id = {id};''')
         return c.fetchone()
+    
+    def get_id(self, name) -> int:
+        c = self.conn.cursor()
+        value = c.execute(f"SELECT id FROM accounts WHERE name = '{name}' ").fetchone()
+        return value['id']
         
