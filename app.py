@@ -1,9 +1,9 @@
 import sqlite3
 
-from accounts import Accounts
-from transactions import Transactions
+from models.accounts import Accounts
+from models.transactions import Transactions
 import utils
-import cli
+import cli.cli as cli
 
 # Static variables
 QUIT = -1

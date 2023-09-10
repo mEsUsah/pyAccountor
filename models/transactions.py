@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import date
 
-from accounts import Accounts
+from models.accounts import Accounts
 
 class Transactions:
     def __init__(self, conn: sqlite3.Connection):
