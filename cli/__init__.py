@@ -1,3 +1,4 @@
-__all__ = ['cli']
+__all__ = ['cli', 'utils']
 
 from .cli import *
+from .utils import *
