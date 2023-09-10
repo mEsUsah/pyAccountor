@@ -36,28 +36,30 @@ class Tab:
             from_frame,
             textvariable=self.from_account,
             state='readonly',
-            values=self.from_list
+            values=self.from_list,
         )
         from_account_selector.pack(side="left")
+        from_account_selector.bind('<<ComboboxSelected>>',self.generate_to_list)
         
         # To
-        to_frame = tk.Frame(transferTab)
-        to_frame.pack(side="top", fill="x", expand=True)
+        self.to_frame = tk.Frame(transferTab)
+        self.to_frame.pack(side="top", fill="x", expand=True)
 
         to_label = tk.Label(
-            to_frame,
+            self.to_frame,
             text="To:",
             width=10,
             anchor="w"
         )
         to_label.pack(side="left")
 
-        to_account_selector = ttk.Combobox(
-            to_frame,
+        self.to_account_selector = ttk.Combobox(
+            self.to_frame,
             textvariable=self.to_account,
             state='readonly',
+            values=self.to_list
         )
-        to_account_selector.pack(side="left")
+        self.to_account_selector.pack(side="left")
 
         # Amount
         amount_frame = tk.Frame(transferTab)
@@ -99,6 +101,24 @@ class Tab:
         self.from_list = []
         for account in self.accounts_list:
             self.from_list.append(account['name'])
+
+    def generate_to_list(self, event: tk.Event) -> None:
+        self.to_list = []
+        self.to_account.set("")
+        selected_to = event.widget.get()
+        for account in self.accounts_list:
+            if account['name'] != selected_to:
+                self.to_list.append(account['name'])
+
+        self.to_account_selector.destroy()
+        
+        self.to_account_selector = ttk.Combobox(
+            self.to_frame,
+            textvariable=self.to_account,
+            state='readonly',
+            values=self.to_list
+        )
+        self.to_account_selector.pack(side="left")
 
 
 
