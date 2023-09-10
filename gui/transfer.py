@@ -20,7 +20,7 @@ class Tab:
         self.from_account = tk.StringVar()
         self.to_account = tk.StringVar()
 
-        # From
+        # From ###############################################################
         from_frame = tk.Frame(transferTab)
         from_frame.pack(side="top", fill="x", expand=True)
 
@@ -41,7 +41,7 @@ class Tab:
         from_account_selector.pack(side="left")
         from_account_selector.bind('<<ComboboxSelected>>',self.generate_to_list)
         
-        # To
+        # To #################################################################
         self.to_frame = tk.Frame(transferTab)
         self.to_frame.pack(side="top", fill="x", expand=True)
 
@@ -61,7 +61,7 @@ class Tab:
         )
         self.to_account_selector.pack(side="left")
 
-        # Amount
+        # Amount #############################################################
         amount_frame = tk.Frame(transferTab)
         amount_frame.pack(side="top", fill="x")
 
@@ -72,14 +72,20 @@ class Tab:
             anchor="w"
         )
         amount_label.pack(side="left")
-
+        
+        
         amount_entry = tk.Entry(
             amount_frame,
             width=30,
+            validate="all",
+            validatecommand=(
+                transferTab.register(self.validate_entry_digit), 
+                '%P'
+            )
         )
         amount_entry.pack(side="left")
         
-        # Amount
+        # Comment #############################################################
         comment_frame = tk.Frame(transferTab)
         comment_frame.pack(side="top", fill="x")
 
@@ -120,6 +126,5 @@ class Tab:
         )
         self.to_account_selector.pack(side="left")
 
-
-
-
+    def validate_entry_digit(self, char):
+        return str.isdigit(char) or char == ""
