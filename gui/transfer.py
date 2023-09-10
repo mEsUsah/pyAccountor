@@ -13,9 +13,12 @@ class Tab:
 
         accounts_db = db.accounts
         self.accounts_list = accounts_db.get_all()
+        self.from_list = []
+        self.to_list = []
+        self.generate_from_list()
+
         self.from_account = tk.StringVar()
         self.to_account = tk.StringVar()
-        print(self.accounts_list)
 
         # From
         from_frame = tk.Frame(transferTab)
@@ -32,7 +35,8 @@ class Tab:
         from_account_selector = ttk.Combobox(
             from_frame,
             textvariable=self.from_account,
-            state='readonly'
+            state='readonly',
+            values=self.from_list
         )
         from_account_selector.pack(side="left")
         
@@ -90,6 +94,12 @@ class Tab:
             width=30,
         )
         comment_entry.pack(side="left")
+
+    def generate_from_list(self) -> None:
+        self.from_list = []
+        for account in self.accounts_list:
+            self.from_list.append(account['name'])
+
 
 
 
